@@ -17,12 +17,20 @@ public class EmployeeService {
 
             }
             //Find Employee
-            public List<Employee> findEmployee(Employee emp)
+            public List<Employee> findEmployee()
             {
                 return empRepository.findAll();
             }
             //Delete Employee
-            public void deleteEmployee(Employee emp){
-                empRepository.delete(emp);
+            public void deleteEmployee(int id){
+                empRepository.deleteById(id);
+            }
+            //Update 
+            public Employee updateEmployee(int id , Employee empDetails){
+                Employee emp= empRepository.findById(id).get();
+                emp.setName(empDetails.getName());
+                emp.setAge(empDetails.getAge());
+                emp.setEmail(empDetails.getEmail());
+                return empRepository.save(emp);
             }
 }
